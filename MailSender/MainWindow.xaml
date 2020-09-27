@@ -6,7 +6,81 @@
         xmlns:local="clr-namespace:MailSender"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Создать"/>
+                <MenuItem Header="Открыть"/>
+                <MenuItem Header="Закрыть"/>
+                <MenuItem Header="Сохранить"/>
+                <Separator/>
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem Header="Сервис">
+                <MenuItem Header="Параметры"/>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе"/>
+            </MenuItem>
+        </Menu>
+        
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem DockPanel.Dock="Right">
+                <ResizeGrip/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="Готов!"/>
+            </StatusBarItem>
+        </StatusBar>
 
-    </Grid>
+        <TabControl>
+            <TabItem Header="Списки">
+                <DockPanel>
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar Header="Серверы" BandIndex="0" Band="0">
+                            <ComboBox MinWidth="120" MaxWidth="200" SelectedIndex="0">
+                                <ComboBoxItem>smtp.yandex.ru</ComboBoxItem>
+                                <ComboBoxItem>smtp.google.com</ComboBoxItem>
+                                <ComboBoxItem>smtp.mail.ru</ComboBoxItem>
+                            </ComboBox>
+                            <Button Content="Добавить"/>
+                            <Button Content="Редактировать"/>
+                            <Button Content="Удалить"/>
+                        </ToolBar>
+                        <ToolBar Header="Планировщик" BandIndex="0" Band="0">
+                            <Button Content="Заплпнировать"/>
+                        </ToolBar>
+                        <ToolBar Header="Отправители" BandIndex="0" Band="1">
+                            <ComboBox MinWidth="120" MaxWidth="200" SelectedIndex="0">
+                                <ComboBoxItem>Иванов</ComboBoxItem>
+                                <ComboBoxItem>Петров</ComboBoxItem>
+                                <ComboBoxItem>Сидоров</ComboBoxItem>
+                            </ComboBox>
+                            <Button Content="Добавить"/>
+                            <Button Content="Редактировать"/>
+                            <Button Content="Удалить"/>
+                        </ToolBar>
+                        <ToolBar Header="Получатели" BandIndex="0" Band="1">
+                            <Button Content="Добавить"/>
+                            <Button Content="Редактировать"/>
+                            <Button Content="Удалить"/>
+                        </ToolBar>
+                    </ToolBarTray>
+                    <GroupBox Header="Список получателей">
+                        <DataGrid>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" MinWidth="30"/>
+                                <DataGridTextColumn Header="Имя" Width="160"/>
+                                <DataGridTextColumn Header="Адрес" MinWidth="160"/>
+                                <DataGridTextColumn Header="Описание" Width="1*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </GroupBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Планировщик"/>
+            <TabItem Header="Письма"/>
+            <TabItem Header="Статистика"/>
+        </TabControl>
+    </DockPanel>
 </Window>
