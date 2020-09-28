@@ -23,7 +23,7 @@
                 <MenuItem Header="О программе"/>
             </MenuItem>
         </Menu>
-        
+
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem DockPanel.Dock="Right">
                 <ResizeGrip/>
@@ -48,7 +48,7 @@
                             <Button Content="Удалить"/>
                         </ToolBar>
                         <ToolBar Header="Планировщик" BandIndex="0" Band="0">
-                            <Button Content="Заплпнировать"/>
+                            <Button Content="Запланировать"/>
                         </ToolBar>
                         <ToolBar Header="Отправители" BandIndex="0" Band="1">
                             <ComboBox MinWidth="120" MaxWidth="200" SelectedIndex="0">
@@ -78,7 +78,108 @@
                     </GroupBox>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Планировщик"/>
+            <TabItem Header="Планировщик">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" MinWidth="191"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Grid.Column="0" Header="Планирование">
+                        <StackPanel>
+                            <TextBlock Text="Дата задания" HorizontalAlignment="Center"/>
+                            <Calendar SelectedDate="2020-09-29"/>
+                            <UniformGrid Columns="1" Margin="5">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Margin" Value="0, 3"/>
+                                        <Setter Property="Background" Value="White"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <Button Content="Запланировать"/>
+                                <Button Content="Отправить сейчас"/>
+                            </UniformGrid>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column = "1" Header="Задания">
+                        <ListBox>
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
+                            <ListBoxItem>
+                                <Border BorderBrush="SkyBlue" BorderThickness="1" Padding="4" CornerRadius="4">
+                                    <Grid>
+                                        <StackPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Время:"/>
+                                                <TextBlock Text="4.05.2021"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Отправитель:"/>
+                                                <TextBlock Text="admin"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Получатель:"/>
+                                                <TextBlock Text="user"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Письмо:"/>
+                                                <TextBlock Text="Тест"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                        <Button VerticalAlignment="Top" 
+                                                HorizontalAlignment="Right" 
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Foreground="Red"
+                                                Padding="5,0" 
+                                                ToolTip="Удалить" 
+                                                Content="X"/>
+                                    </Grid>
+                                </Border>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <Border BorderBrush="SkyBlue" BorderThickness="1" Padding="4" CornerRadius="4">
+                                    <Grid>
+                                        <StackPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Время:"/>
+                                                <TextBlock Text="4.05.2021"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Отправитель:"/>
+                                                <TextBlock Text="admin"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Получатель:"/>
+                                                <TextBlock Text="user"/>
+                                            </DockPanel>
+                                            <DockPanel>
+                                                <TextBlock Text="Письмо:"/>
+                                                <TextBlock Text="Тест"/>
+                                            </DockPanel>
+                                        </StackPanel>
+                                        <Button VerticalAlignment="Top" 
+                                                HorizontalAlignment="Right" 
+                                                BorderThickness="0"
+                                                Background="Transparent"
+                                                Foreground="Red"
+                                                Padding="5,0" 
+                                                ToolTip="Удалить" 
+                                                Content="X"/>
+                                    </Grid>
+                                </Border>
+                            </ListBoxItem>
+                        </ListBox>
+                    </GroupBox>
+                    <GridSplitter Grid.Column="0"
+                                  VerticalAlignment="Stretch"
+                                  HorizontalContentAlignment="Right"
+                                  Width="3"
+                                  Foreground="Transparent"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Письма"/>
             <TabItem Header="Статистика"/>
         </TabControl>
