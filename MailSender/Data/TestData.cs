@@ -38,7 +38,7 @@ namespace MailSender.Data
             })
             .ToList();
 
-        public static List<Message> messages { get; } = Enumerable.Range(1, 20)
+        public static List<Message> Messages { get; } = Enumerable.Range(1, 20)
             .Select(i => new Message
             {
                 Id = i,
