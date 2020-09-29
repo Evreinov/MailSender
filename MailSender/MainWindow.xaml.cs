@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.Diagnostics;
+using System.Net.Mail;
 using System.Windows;
 using MailSender.lib;
 using MailSender.Models;
@@ -27,13 +28,20 @@ namespace MailSender
 
             try
             {
+                var timer = Stopwatch.StartNew();
                 sent_service.SendMail(sender.Address, recipient.Address, mail.Subject, mail.Body);
+                timer.Stop();
+                MessageBox.Show(
+                    $"Почта отправленна успешно за {timer.Elapsed.TotalSeconds:0.##}",
+                    "Отправка почты",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             catch (SmtpException e)
             {
                 MessageBox.Show(
                     "Ошибка при отправке почты " + e.Message, 
-                    "Ошибка",
+                    "Отправка почты",
                     MessageBoxButton.OK, 
                     MessageBoxImage.Error);
             }
