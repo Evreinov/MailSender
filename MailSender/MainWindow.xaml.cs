@@ -54,7 +54,7 @@ namespace MailSender
             var password = server.Password;
 
             if (!ServerEditDialog.ShowDialog(
-                "Редактирование сервера",
+                "Редактировать сервер",
                 ref name,
                 ref address,
                 ref port,
