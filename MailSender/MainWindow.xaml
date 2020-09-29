@@ -45,8 +45,8 @@
                                     <Setter Property="FontSize" Value="85"/>
                                 </Style>
                             </ToolBar.Resources>
-
-                            <ComboBox MinWidth="120" 
+                            <ComboBox Name="ServersList"
+                                      MinWidth="120" 
                                       MaxWidth="200" 
                                       SelectedIndex="0" 
                                       Margin="24,0,0,0"
@@ -70,7 +70,8 @@
                             <Button Content="Запланировать" fa:Awesome.Content="Solid_Clock" Foreground="Blue"/>
                         </ToolBar>
                         <ToolBar Header="Отправители" BandIndex="0" Band="1">
-                            <ComboBox MinWidth="120" 
+                            <ComboBox Name="SendersList"  
+                                      MinWidth="120" 
                                       MaxWidth="200" 
                                       SelectedIndex="0"
                                       ItemsSource="{x:Static data:TestData.Senders}">
@@ -91,7 +92,8 @@
                         </ToolBar>
                     </ToolBarTray>
                     <GroupBox Header="Список адресатов">
-                        <DataGrid ItemsSource="{x:Static data:TestData.Recipients}" 
+                        <DataGrid Name="RecipientsList" 
+                                  ItemsSource="{x:Static data:TestData.Recipients}" 
                                   AutoGenerateColumns="False"
                                   GridLinesVisibility="Vertical"
                                   AlternatingRowBackground="SkyBlue"
@@ -129,7 +131,7 @@
                                         <TextBlock Text="Запланировать"/>
                                     </StackPanel>
                                 </Button>
-                                <Button>
+                                <Button Click="OnSendButtonClick">
                                     <StackPanel Orientation="Horizontal">
                                         <fa:ImageAwesome Icon="Solid_PaperPlane" Foreground="Black" Height="14" Margin="5,0"/>
                                         <TextBlock Text="Отправить сейчас"/>

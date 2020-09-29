@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender", "MailSender\MailSender.csproj", "{DB45F600-A0EE-48D5-B543-3D85B0832C9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailSender", "MailSender\MailSender.csproj", "{DB45F600-A0EE-48D5-B543-3D85B0832C9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C6A2BBAB-CCF2-4FCA-A329-F5E791B5443B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMailSender", "Tests\ConsoleMailSender\ConsoleMailSender.csproj", "{CF25224F-2E6F-4CE5-8086-C40A3FD0E684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleMailSender", "Tests\ConsoleMailSender\ConsoleMailSender.csproj", "{CF25224F-2E6F-4CE5-8086-C40A3FD0E684}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfMailSender", "Tests\WpfMailSender\WpfMailSender.csproj", "{0D50D0E3-E338-4291-BBF3-52758BA28512}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfMailSender", "Tests\WpfMailSender\WpfMailSender.csproj", "{0D50D0E3-E338-4291-BBF3-52758BA28512}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW-1_MailSenderTest", "Tests\HW-1_MailSenderTest\HW-1_MailSenderTest.csproj", "{B49BED5C-AD4B-4202-8C99-8127F5660FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HW-1_MailSenderTest", "Tests\HW-1_MailSenderTest\HW-1_MailSenderTest.csproj", "{B49BED5C-AD4B-4202-8C99-8127F5660FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailSender.lib", "MailSender.lib\MailSender.lib.csproj", "{714146FF-E328-442A-B6F4-5FDB6315978C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{B49BED5C-AD4B-4202-8C99-8127F5660FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B49BED5C-AD4B-4202-8C99-8127F5660FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B49BED5C-AD4B-4202-8C99-8127F5660FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{714146FF-E328-442A-B6F4-5FDB6315978C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{714146FF-E328-442A-B6F4-5FDB6315978C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{714146FF-E328-442A-B6F4-5FDB6315978C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{714146FF-E328-442A-B6F4-5FDB6315978C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

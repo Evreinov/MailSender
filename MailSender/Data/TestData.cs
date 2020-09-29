@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using MailSender.Models;
+using System.Xaml;
+using MailSender.lib.Services;
 
 namespace MailSender.Data
 {
@@ -33,16 +35,16 @@ namespace MailSender.Data
                 Name = $"Имя {i}",
                 Address = $"smtp.server{i}",
                 Login = $"Пользователь {i}",
-                Password = $"Пароль{i}",
+                Password = TextEncoder.Decode($"Пароль{i}"),
                 UseSSL = i % 2 == 0
             })
             .ToList();
 
-        public static List<Message> Messages { get; } = Enumerable.Range(1, 20)
-            .Select(i => new Message
+        public static List<Mail> Messages { get; } = Enumerable.Range(1, 20)
+            .Select(i => new Mail
             {
                 Id = i,
-                Title = $"Заголовок {i}",
+                Subject = $"Заголовок {i}",
                 Body = $"Текст сообщения {i}."
             })
             .ToList();
