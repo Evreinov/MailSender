@@ -50,8 +50,18 @@
                                       MaxWidth="200" 
                                       SelectedIndex="0" 
                                       Margin="24,0,0,0"
-                                      ItemsSource="{x:Static data:TestData.Servers}"
-                                      DisplayMemberPath="Address"/>
+                                      ItemsSource="{x:Static data:TestData.Servers}">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate DataType="m:Server">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Address}"/>
+                                            <TextBlock Text=":"/>
+                                            <TextBlock Text="{Binding Port}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
                             <Button ToolTip="Добавить" fa:Awesome.Content ="Solid_PlusCircle" Foreground="Green"/>
                             <Button ToolTip="Редактировать" fa:Awesome.Content="Solid_PencilAlt" Foreground="Orange"/>
                             <Button ToolTip="Удалить" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
@@ -228,7 +238,9 @@
                         <TextBox Text="{Binding Path=SelectedItem.Title, ElementName=MailsList}"/>
                     </GroupBox>
                     <GroupBox Grid.Column="1" Grid.Row="1" Header="Тело письма">
-                        <TextBox Text="{Binding Path=SelectedItem.Body, ElementName=MailsList}" />
+                        <TextBox Text="{Binding Path=SelectedItem.Body, ElementName=MailsList}" 
+                                 AcceptsReturn="True"
+                                 TextWrapping="Wrap"/>
                     </GroupBox>
                 </Grid>
             </TabItem>
