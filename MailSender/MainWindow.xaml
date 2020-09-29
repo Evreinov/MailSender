@@ -7,7 +7,7 @@
         xmlns:data="clr-namespace:MailSender.Data"
         xmlns:m="clr-namespace:MailSender.Models"
         xmlns:local="clr-namespace:MailSender"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Рассыльщик" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -62,9 +62,9 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
-                            <Button ToolTip="Добавить" fa:Awesome.Content ="Solid_PlusCircle" Foreground="Green"/>
-                            <Button ToolTip="Редактировать" fa:Awesome.Content="Solid_PencilAlt" Foreground="Orange"/>
-                            <Button ToolTip="Удалить" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
+                            <Button ToolTip="Добавить" Click="OnAddServerButtonClick" fa:Awesome.Content ="Solid_PlusCircle" Foreground="Green"/>
+                            <Button ToolTip="Редактировать" Click="OnEditServerButtonClick" fa:Awesome.Content="Solid_PencilAlt" Foreground="Orange"/>
+                            <Button ToolTip="Удалить" Click="OnDeleteServerButtonClick" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
                         </ToolBar>
                         <ToolBar Header="Перейти в планировщик" BandIndex="0" Band="0">
                             <Button Content="Запланировать" fa:Awesome.Content="Solid_Clock" Foreground="Blue"/>
