@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace MailSender.lib
 {
-    public class MailSenderService
+    public class SmtpSender
     {
         public string ServerAddress { get; set; }
         public int ServerPort { get; set; }

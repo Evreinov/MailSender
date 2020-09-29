@@ -16,7 +16,7 @@ namespace MailSender
             if (!(ServersList.SelectedItem is Server server)) return;
             if (!(MailsList.SelectedItem is Mail mail)) return;
 
-            MailSenderService sent_service = new MailSenderService
+            SmtpSender sent_service = new SmtpSender
             {
                 ServerAddress = server.Address,
                 ServerPort = server.Port,
