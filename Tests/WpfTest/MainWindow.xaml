@@ -3,10 +3,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfTest"
+        xmlns:vm="clr-namespace:WpfTest.ViewModels"
+        xmlns:local="clr-namespace:WpfTest.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding Title}" Height="217" Width="800">
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
-
+        <TextBox HorizontalAlignment="Left" 
+                 Margin="10,10,0,0" 
+                 Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"  
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Top" 
+                 Width="120"/>
+        <Slider HorizontalAlignment="Stretch" 
+                Margin="150,10,0,0" 
+                VerticalAlignment="Top"
+                Height="18"
+                Value="{Binding X, ElementName=EllipseTranslator}"
+                Maximum="500"/>
+        <Ellipse HorizontalAlignment="Left" 
+                 Height="100" 
+                 Margin="10,72,0,0" 
+                 Stroke="Red"
+                 Fill="Aquamarine"
+                 VerticalAlignment="Top" 
+                 Width="100">
+            <Ellipse.RenderTransform>
+                <TranslateTransform x:Name="EllipseTranslator" X="0" Y="0"/>
+            </Ellipse.RenderTransform>
+        </Ellipse>
     </Grid>
 </Window>
