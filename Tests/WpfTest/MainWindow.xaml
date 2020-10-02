@@ -21,7 +21,7 @@
                 Margin="150,10,0,0" 
                 VerticalAlignment="Top"
                 Height="18"
-                Value="{Binding X, ElementName=EllipseTranslator}"
+                Value="{Binding X, UpdateSourceTrigger=PropertyChanged}"
                 Maximum="500"/>
         <Ellipse HorizontalAlignment="Left" 
                  Height="100" 
@@ -31,7 +31,7 @@
                  VerticalAlignment="Top" 
                  Width="100">
             <Ellipse.RenderTransform>
-                <TranslateTransform x:Name="EllipseTranslator" X="0" Y="0"/>
+                <TranslateTransform x:Name="EllipseTranslator" X="{Binding X, UpdateSourceTrigger=PropertyChanged}" Y="0"/>
             </Ellipse.RenderTransform>
         </Ellipse>
     </Grid>
