@@ -34,5 +34,10 @@
                 <TranslateTransform x:Name="EllipseTranslator" X="{Binding X, UpdateSourceTrigger=PropertyChanged}" Y="0"/>
             </Ellipse.RenderTransform>
         </Ellipse>
+        <TextBlock Text="{Binding CurrentTime, UpdateSourceTrigger=PropertyChanged, StringFormat=HH:mm:ss.ffff}" Margin="10,33,-10,-33">
+            <TextBlock.DataContext>
+                <vm:CurrentTimeViewModel/>
+            </TextBlock.DataContext>
+        </TextBlock>
     </Grid>
 </Window>
