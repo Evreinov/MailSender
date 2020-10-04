@@ -9,12 +9,6 @@ namespace WpfTest.ViewModels
         public string Title
         {
             get => _Title;
-            //set
-            //{
-            //    if (_Title == value) return;
-            //    _Title = value;
-            //    OnPropertyChange();
-            //}
             set => Set(ref _Title, value);
         }
 
@@ -24,6 +18,5 @@ namespace WpfTest.ViewModels
             get => _X;
             set => Set(ref _X, value);
         }
-
     }
 }

@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:WpfTest.ViewModels"
-        xmlns:local="clr-namespace:WpfTest.ViewModels"
+        xmlns:cmd="clr-namespace:WpfTest.Commands"
+        xmlns:local="clr-namespace:WpfTest"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="217" Width="800">
     <Window.DataContext>
@@ -34,10 +35,31 @@
                 <TranslateTransform x:Name="EllipseTranslator" X="{Binding X, UpdateSourceTrigger=PropertyChanged}" Y="0"/>
             </Ellipse.RenderTransform>
         </Ellipse>
-        <TextBlock Text="{Binding CurrentTime, UpdateSourceTrigger=PropertyChanged, StringFormat=HH:mm:ss.ffff}" Margin="10,33,-10,-33">
+        <TextBlock Text="{Binding CurrentTime, UpdateSourceTrigger=PropertyChanged, StringFormat=HH:mm:ss.ffff}" 
+                   Margin="10,33,-10,-33"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left">
             <TextBlock.DataContext>
                 <vm:CurrentTimeViewModel/>
             </TextBlock.DataContext>
         </TextBlock>
+        <Button VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" 
+                Content="Close window"
+                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+            <Button.Command>
+                <cmd:CloseWindowCommand/>
+            </Button.Command>
+        </Button>
+        <Button VerticalAlignment="Bottom" 
+                HorizontalAlignment="Right" 
+                Content="Open window"
+                Margin="0,0,91,0"
+                Command="{Binding ShowDialogCommand}"
+                CommandParameter="Oppps!!!!">
+            <Button.DataContext>
+                <vm:ShowDialogViewModel/>
+            </Button.DataContext>
+        </Button>
     </Grid>
 </Window>
