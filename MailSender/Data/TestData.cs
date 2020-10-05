@@ -5,12 +5,28 @@ using System.Text;
 using MailSender.Models;
 using System.Xaml;
 using MailSender.lib.Services;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace MailSender.Data
 {
-    static class TestData
+    class TestData
     {
-        public static List<Sender> Senders { get; } = Enumerable.Range(1, 20)
+        public static TestData LoadFromXML(string FileName)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(TestData));
+            using var file = File.OpenText(FileName);
+            return (TestData)serializer.Deserialize(file);
+        }
+
+        public void SaveToXML(string FileName)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(TestData));
+            using var file = File.Create(FileName);
+            serializer.Serialize(file, this);
+        }
+
+        public IList<Sender> Senders { get; set; } = Enumerable.Range(1, 20)
             .Select(i => new Sender
             {
                 Id = i,
@@ -19,7 +35,7 @@ namespace MailSender.Data
             })
             .ToList();
 
-        public static List<Recipient> Recipients { get; } = Enumerable.Range(1, 20)
+        public IList<Recipient> Recipients { get; set; } = Enumerable.Range(1, 20)
             .Select(i => new Recipient
             {
                 Id = i,
@@ -28,7 +44,7 @@ namespace MailSender.Data
             })
             .ToList();
 
-        public static List<Server> Servers { get; } = Enumerable.Range(1, 5)
+        public IList<Server> Servers { get; set; } = Enumerable.Range(1, 5)
             .Select(i => new Server
             {
                 Id = i,
@@ -40,7 +56,7 @@ namespace MailSender.Data
             })
             .ToList();
 
-        public static List<Mail> Mails { get; } = Enumerable.Range(1, 20)
+        public IList<Mail> Mails { get; set; } = Enumerable.Range(1, 20)
             .Select(i => new Mail
             {
                 Id = i,

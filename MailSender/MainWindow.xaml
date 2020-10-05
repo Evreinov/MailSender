@@ -28,6 +28,7 @@
             <MenuItem Header="Сервис">
                 <MenuItem Header="Параметры"/>
                 <MenuItem Header="Загрузить данные" Command="{Binding LoadDataCommand}"/>
+                <MenuItem Header="Загрузить данные" Command="{Binding SaveDataCommand}"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="О программе"/>
@@ -56,11 +57,12 @@
                             <ComboBox Name="ServersList"
                                       MinWidth="120" 
                                       MaxWidth="200" 
-                                      SelectedIndex="0" 
                                       Margin="24,0,0,0"
-                                      ItemsSource="{Binding Servers}">
+                                      SelectedIndex="0"
+                                      ItemsSource="{Binding Servers}"
+                                      SelectedItem="{Binding SelectedServer}">
                                 <ComboBox.ItemTemplate>
-                                    <DataTemplate DataType="m:Server">
+                                    <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Address}"/>
                                             <TextBlock Text=":"/>
@@ -70,9 +72,21 @@
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
 
-                            <Button ToolTip="Добавить" fa:Awesome.Content ="Solid_PlusCircle" Foreground="Green"/>
-                            <Button ToolTip="Редактировать" fa:Awesome.Content="Solid_PencilAlt" Foreground="Orange"/>
-                            <Button ToolTip="Удалить" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
+                            <Button ToolTip="Добавить" 
+                                    fa:Awesome.Content ="Solid_PlusCircle" 
+                                    Foreground="Green"
+                                    Command="{Binding CreateServerCommand}"
+                                    CommandParameter="{Binding SelectedServer}"/>
+                            <Button ToolTip="Редактировать" 
+                                    fa:Awesome.Content="Solid_PencilAlt" 
+                                    Foreground="Orange"
+                                    Command="{Binding EditServerCommand}"
+                                    CommandParameter="{Binding SelectedServer}"/>
+                            <Button ToolTip="Удалить" 
+                                    fa:Awesome.Content="Solid_MinusCircle" 
+                                    Foreground="Red"
+                                    Command="{Binding DelateServerCommand}"
+                                    CommandParameter="{Binding SelectedServer}"/>
                         </ToolBar>
                         <ToolBar Header="Перейти в планировщик" BandIndex="0" Band="0">
                             <Button Content="Запланировать" fa:Awesome.Content="Solid_Clock" Foreground="Blue"/>
@@ -81,8 +95,8 @@
                             <ComboBox Name="SendersList"  
                                       MinWidth="120" 
                                       MaxWidth="200" 
-                                      SelectedIndex="0"
-                                      ItemsSource="{Binding Senders}">
+                                      ItemsSource="{Binding Senders}"
+                                      SelectedItem="{Binding SelectedSender}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate DataType="m:Sender">
                                         <TextBlock Text="{Binding Name}" ToolTip="{Binding Address}"/>
@@ -102,6 +116,7 @@
                     <GroupBox Header="Список адресатов">
                         <DataGrid Name="RecipientsList" 
                                   ItemsSource="{Binding Recipients}" 
+                                  SelectedItem="{Binding SelectedRecipient}"
                                   AutoGenerateColumns="False"
                                   GridLinesVisibility="Vertical"
                                   AlternatingRowBackground="SkyBlue"
@@ -241,6 +256,7 @@
                     <GroupBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Header="Письма">
                         <ListBox x:Name="MailsList" 
                                  ItemsSource="{Binding Mails}"
+                                 SelectedItem="{Binding SelectedMail}"
                                  DisplayMemberPath="Subject">
                         </ListBox>
                     </GroupBox>
