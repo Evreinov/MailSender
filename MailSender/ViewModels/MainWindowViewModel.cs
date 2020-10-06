@@ -13,7 +13,10 @@ namespace MailSender.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
         static readonly string __DataFileName = "TestData.xml";
+
         private readonly IMailService _MailService;
+
+        public StatisticViewModel Statistic { get; } = new StatisticViewModel();
 
         private string _Title = "Рассыльщик почты";
         public string Title
@@ -228,6 +231,8 @@ namespace MailSender.ViewModels
 
             var mail_sender = _MailService.GetSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password);
             mail_sender.Send(sender.Address, recipient.Address, mail.Subject, mail.Body);
+
+            Statistic.MessageSended();
         }
 
         #endregion

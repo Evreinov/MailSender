@@ -297,7 +297,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Column="0" Grid.Row="0" Text="Отправленно писем:"/>
-                        <TextBlock Grid.Column="1" Grid.Row="0" Text="3"/>
+                        <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Statistic.SendMessagesCount}"/>
                         <TextBlock Grid.Column="0" Grid.Row="1" Text="Всего отправителей:"/>
                         <TextBlock Grid.Column="1" Grid.Row="1" Text="0"/>
                         <TextBlock Grid.Column="0" Grid.Row="2" Text="Всего получателей:"/>
