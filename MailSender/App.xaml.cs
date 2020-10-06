@@ -22,7 +22,11 @@ namespace MailSender
         private static void InitializeServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();
+#if DEBUG
+            services.AddTransient<IMailService, DebugMailService>();
+#else
             services.AddTransient<IMailService, SmtpMailService>();
+#endif
         }
     }
 }
