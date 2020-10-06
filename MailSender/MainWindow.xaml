@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.com/icons/"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:data="clr-namespace:MailSender.Data"
         xmlns:m="clr-namespace:MailSender.lib.Models;assembly=MailSender.lib"
+        xmlns:v="clr-namespace:MailSender.Views"
         xmlns:local="clr-namespace:MailSender"
         DataContext="{Binding Path=MainWindowModel, Source={StaticResource Locator}}"
         Title="{Binding Title}" Height="450" Width="800">
@@ -114,22 +114,7 @@
                             <Button ToolTip="Удалить" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
                         </ToolBar>
                     </ToolBarTray>
-                    <GroupBox Header="Список адресатов">
-                        <DataGrid Name="RecipientsList" 
-                                  ItemsSource="{Binding Recipients}" 
-                                  SelectedItem="{Binding SelectedRecipient}"
-                                  AutoGenerateColumns="False"
-                                  GridLinesVisibility="Vertical"
-                                  AlternatingRowBackground="SkyBlue"
-                                  VerticalGridLinesBrush="Gray">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="ID" MinWidth="30" Binding="{Binding Id}"/>
-                                <DataGridTextColumn Header="Имя" Width="160" Binding="{Binding Name}"/>
-                                <DataGridTextColumn Header="Адрес" MinWidth="160" Binding="{Binding Address}"/>
-                                <DataGridTextColumn Header="Описание" Width="1*" Binding="{Binding Description}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </GroupBox>
+                    <v:RecipientsListView Grid.Row="1"/>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Планировщик">

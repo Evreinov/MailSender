@@ -1,5 +1,4 @@
 ﻿using MailSender.Commands;
-using MailSender.Data;
 using MailSender.lib.Interface;
 using MailSender.lib.Models;
 using MailSender.ViewModels.Base;

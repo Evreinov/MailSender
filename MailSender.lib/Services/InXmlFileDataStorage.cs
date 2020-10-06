@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using MailSender.lib.Interface;
 using MailSender.lib.Models;
@@ -28,6 +29,8 @@ namespace MailSender.lib.Services
         ICollection<Sender> IStorage<Sender>.Items => Data.Senders;
         ICollection<Recipient> IStorage<Recipient>.Items => Data.Recipients;
         ICollection<Mail> IStorage<Mail>.Items => Data.Mails;
+
+        public object GlobalConfiguration { get; private set; }
 
         public void Load()
         {
