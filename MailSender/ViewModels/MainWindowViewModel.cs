@@ -1,7 +1,9 @@
 ﻿using MailSender.Commands;
 using MailSender.Data;
+using MailSender.lib.Interface;
 using MailSender.Models;
 using MailSender.ViewModels.Base;
+using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace MailSender.ViewModels
     class MainWindowViewModel : ViewModelBase
     {
         static readonly string __DataFileName = "TestData.xml";
+        private readonly IMailService _MailService;
 
         private string _Title = "Рассыльщик почты";
         public string Title
@@ -55,26 +58,40 @@ namespace MailSender.ViewModels
             set => Set(ref _SelectedServer, value); 
         }
 
-        private Server _SelectedSender;
-        public Server SelectedSender
+        private Sender _SelectedSender;
+        public Sender SelectedSender
         {
             get => _SelectedSender;
             set => Set(ref _SelectedSender, value);
         }
 
-        private Server _SelectedRecipient;
-        public Server SelectedRecipient
+        private Recipient _SelectedRecipient;
+        public Recipient SelectedRecipient
         {
             get => _SelectedRecipient;
             set => Set(ref _SelectedRecipient, value);
         }
 
-        private Server _SelectedMail;
-        public Server SelectedMail
+        private Mail _SelectedMail;
+        public Mail SelectedMail
         {
             get => _SelectedMail;
             set => Set(ref _SelectedMail, value);
         }
+
+        public MainWindowViewModel(IMailService MailService)
+        {
+            _MailService = MailService;
+
+            TestData data = File.Exists(__DataFileName)
+                ? TestData.LoadFromXML(__DataFileName)
+                : new TestData();
+            Servers = new ObservableCollection<Server>(data.Servers);
+            Senders = new ObservableCollection<Sender>(data.Senders);
+            Recipients = new ObservableCollection<Recipient>(data.Recipients);
+            Mails = new ObservableCollection<Mail>(data.Mails);
+        }
+
         #region Command
 
         #region LoadDataCommand
@@ -100,7 +117,7 @@ namespace MailSender.ViewModels
             ??= new LambdaCommand(OnSaveDataCommandExecute);
         private void OnSaveDataCommandExecute(object parameter)
         {
-            TestData data = new TestData
+            var data = new TestData
             {
                 Servers = Servers,
                 Senders = Senders,
@@ -191,7 +208,31 @@ namespace MailSender.ViewModels
         }
         #endregion
 
+        #region SendMailCommand
+        private ICommand _SendMailCommand;
+        public ICommand SenMailCommand => _SendMailCommand
+            ??= new LambdaCommand(OnSendMailCommandExecute, CanSendMailCommandExecute);
+        private bool CanSendMailCommandExecute(object obj)
+        {
+            if (SelectedServer is null) return false;
+            if (SelectedSender is null) return false;
+            if (SelectedRecipient is null) return false;
+            if (SelectedMail is null) return false;
+            return true;
+        }
+        private void OnSendMailCommandExecute(object obj)
+        {
+            var server = SelectedServer;
+            var sender = SelectedSender;
+            var recipient = SelectedRecipient;
+            var mail = SelectedMail;
+
+            var mail_sender = _MailService.GetSender(server.Address, server.Port, server.UseSSL, server.Login, server.Password);
+            mail_sender.Send(sender.Address, recipient.Address, mail.Subject, mail.Body);
+        }
+
         #endregion
 
+        #endregion
     }
 }
