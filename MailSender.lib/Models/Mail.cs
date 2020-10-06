@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MailSender.Models
+namespace MailSender.lib.Models
 {
     public class Mail
     {

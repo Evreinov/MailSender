@@ -1,7 +1,7 @@
 ﻿using MailSender.Commands;
 using MailSender.Data;
 using MailSender.lib.Interface;
-using MailSender.Models;
+using MailSender.lib.Models;
 using MailSender.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.IO;
