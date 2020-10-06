@@ -3,7 +3,6 @@ using MailSender.Data;
 using MailSender.lib.Interface;
 using MailSender.Models;
 using MailSender.ViewModels.Base;
-using System.CodeDom;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -210,7 +209,7 @@ namespace MailSender.ViewModels
 
         #region SendMailCommand
         private ICommand _SendMailCommand;
-        public ICommand SenMailCommand => _SendMailCommand
+        public ICommand SendMailCommand => _SendMailCommand
             ??= new LambdaCommand(OnSendMailCommandExecute, CanSendMailCommandExecute);
         private bool CanSendMailCommandExecute(object obj)
         {
