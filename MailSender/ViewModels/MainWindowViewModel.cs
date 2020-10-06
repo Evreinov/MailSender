@@ -4,7 +4,6 @@ using MailSender.lib.Interface;
 using MailSender.lib.Models;
 using MailSender.ViewModels.Base;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Windows.Input;
 
@@ -12,9 +11,11 @@ namespace MailSender.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
-        static readonly string __DataFileName = "TestData.xml";
-
         private readonly IMailService _MailService;
+        private readonly IServersStorage _ServersStorage;
+        private readonly ISendersStorage _SendersStorage;
+        private readonly IRecipientsStorage _RecipientsStorage;
+        private readonly IMailsStorage _MailsStorage;
 
         public StatisticViewModel Statistic { get; } = new StatisticViewModel();
 
@@ -81,17 +82,18 @@ namespace MailSender.ViewModels
             set => Set(ref _SelectedMail, value);
         }
 
-        public MainWindowViewModel(IMailService MailService)
+        public MainWindowViewModel(IMailService MailService, 
+            IServersStorage ServerStorage, 
+            ISendersStorage SendersStorage, 
+            IRecipientsStorage RecipientsStorage, 
+            IMailsStorage MessagesStorage)
         {
-            _MailService = MailService;
 
-            TestData data = File.Exists(__DataFileName)
-                ? TestData.LoadFromXML(__DataFileName)
-                : new TestData();
-            Servers = new ObservableCollection<Server>(data.Servers);
-            Senders = new ObservableCollection<Sender>(data.Senders);
-            Recipients = new ObservableCollection<Recipient>(data.Recipients);
-            Mails = new ObservableCollection<Mail>(data.Mails);
+            _MailService = MailService;
+            _ServersStorage = ServerStorage; 
+            _SendersStorage = SendersStorage; 
+            _RecipientsStorage = RecipientsStorage; 
+            _MailsStorage = MessagesStorage;
         }
 
         #region Command
@@ -102,14 +104,14 @@ namespace MailSender.ViewModels
             ??= new LambdaCommand(OnLoadDataCommandExecute);
         private void OnLoadDataCommandExecute(object parameter)
         {
-            TestData data = File.Exists(__DataFileName)
-                ? TestData.LoadFromXML(__DataFileName)
-                : new TestData();
-
-            Servers = new ObservableCollection<Server>(data.Servers);
-            Senders = new ObservableCollection<Sender>(data.Senders);
-            Recipients = new ObservableCollection<Recipient>(data.Recipients);
-            Mails = new ObservableCollection<Mail>(data.Mails);
+            _ServersStorage.Load(); 
+            _RecipientsStorage.Load(); 
+            _SendersStorage.Load(); 
+            _MailsStorage.Load(); 
+            Servers = new ObservableCollection<Server>(_ServersStorage.Items); 
+            Senders = new ObservableCollection<Sender>(_SendersStorage.Items); 
+            Recipients = new ObservableCollection<Recipient>(_RecipientsStorage.Items); 
+            Mails = new ObservableCollection<Mail>(_MailsStorage.Items);
         }
         #endregion
 
@@ -119,15 +121,10 @@ namespace MailSender.ViewModels
             ??= new LambdaCommand(OnSaveDataCommandExecute);
         private void OnSaveDataCommandExecute(object parameter)
         {
-            var data = new TestData
-            {
-                Servers = Servers,
-                Senders = Senders,
-                Recipients = Recipients,
-                Mails = Mails
-            };
-
-            data.SaveToXML(__DataFileName);
+            _ServersStorage.SaveChanges(); 
+            _SendersStorage.SaveChanges(); 
+            _RecipientsStorage.SaveChanges(); 
+            _MailsStorage.SaveChanges();
         }
         #endregion
 
@@ -157,6 +154,7 @@ namespace MailSender.ViewModels
                 Login = login,
                 Password = password
             };
+            _ServersStorage.Items.Add(server);
             Servers.Add(server);
         }
         #endregion
@@ -205,6 +203,7 @@ namespace MailSender.ViewModels
         private void OnDeleteServerCommandExecute(object obj)
         {
             if (!(obj is Server server)) return;
+            _ServersStorage.Items.Remove(server);
             Servers.Remove(server);
             SelectedServer = Servers.FirstOrDefault();
         }
