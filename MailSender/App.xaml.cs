@@ -27,9 +27,10 @@ namespace MailSender
 #else
             services.AddTransient<IMailService, SmtpMailService>();
 #endif
+            services.AddSingleton<IEncryptorService, Rfc2898Encryptor>();
 
             // Выбираем либо этот блок
-            var memory_store = new InMemoryDataStorage();
+            var memory_store = new InMemoryDataStorage(new Rfc2898Encryptor());
             services.AddSingleton<IServersStorage>(memory_store);
             services.AddSingleton<ISendersStorage>(memory_store);
             services.AddSingleton<IRecipientsStorage>(memory_store);

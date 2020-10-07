@@ -1,5 +1,6 @@
 ﻿using MailSender.lib.Interface;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace MailSender.lib.Services
 {
@@ -14,7 +15,7 @@ namespace MailSender.lib.Services
             private readonly int port;
             private readonly bool useSSL;
             private readonly string login;
-            private readonly string password;
+            private string  password;
 
             public DebugMailSender(string address, int port, bool useSSL, string login, string password)
             {

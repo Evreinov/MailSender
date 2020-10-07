@@ -8,6 +8,13 @@ namespace MailSender.lib.Services
 {
     public class InMemoryDataStorage : IServersStorage, ISendersStorage, IRecipientsStorage, IMailsStorage
     {
+        private readonly IEncryptorService _EncryptorService;
+
+        public InMemoryDataStorage(IEncryptorService EncryptorService)
+        {
+            _EncryptorService = EncryptorService;
+        }
+
         public ICollection<Server> Servers { get; set; } = new List<Server>();
         public ICollection<Sender> Senders { get; set; } = new List<Sender>();
         public ICollection<Recipient> Recipients { get; set; } = new List<Recipient>();
@@ -30,7 +37,7 @@ namespace MailSender.lib.Services
                         Name = $"Имя {i}",
                         Address = $"smtp.server{i}",
                         Login = $"Пользователь {i}",
-                        Password = TextEncoder.Decode($"Пароль{i}"),
+                        Password = _EncryptorService.Encrypt($"Пароль{i}", "Пароль!"),
                         UseSSL = i % 2 == 0
                     })
                     .ToList();
@@ -65,7 +72,6 @@ namespace MailSender.lib.Services
                     })
                     .ToList();
         }
-
         public void SaveChanges()
         {
             Debug.WriteLine("Вызвана процедура сохранения данных");
