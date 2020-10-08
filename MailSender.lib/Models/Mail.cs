@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MailSender.Models
+namespace MailSender.lib.Models
 {
-    class Mail
+    public class Mail
     {
         public int Id { get; set; }
         public string Subject { get; set; }
