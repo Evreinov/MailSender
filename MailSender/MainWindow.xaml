@@ -104,7 +104,11 @@
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                             </ComboBox>
-                            <Button ToolTip="Добавить" fa:Awesome.Content ="Solid_PlusCircle" Foreground="Green"/>
+                            <Button ToolTip="Добавить" 
+                                    fa:Awesome.Content ="Solid_PlusCircle" 
+                                    Foreground="Green"
+                                    Command="{Binding CreateSenderCommand}"
+                                    />
                             <Button ToolTip="Редактировать" fa:Awesome.Content="Solid_PencilAlt" Foreground="Orange" />
                             <Button ToolTip="Удалить" fa:Awesome.Content="Solid_MinusCircle" Foreground="Red"/>
                         </ToolBar>

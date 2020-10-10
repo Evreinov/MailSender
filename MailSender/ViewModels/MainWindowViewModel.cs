@@ -1,6 +1,8 @@
 ﻿using MailSender.Commands;
+using MailSender.Interfaces;
 using MailSender.lib.Interface;
 using MailSender.lib.Models;
+using MailSender.Services;
 using MailSender.ViewModels.Base;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace MailSender.ViewModels
         private readonly ISendersStorage _SendersStorage;
         private readonly IRecipientsStorage _RecipientsStorage;
         private readonly IMailsStorage _MailsStorage;
+        //private readonly IDialogService _DialogService;
 
         public StatisticViewModel Statistic { get; } = new StatisticViewModel();
 
@@ -205,6 +208,16 @@ namespace MailSender.ViewModels
             _ServersStorage.Items.Remove(server);
             Servers.Remove(server);
             SelectedServer = Servers.FirstOrDefault();
+        }
+        #endregion
+
+        #region CreateSenderCommand
+        private ICommand _CreateSenderCommand;
+        public ICommand CreateSenderCommand => _CreateSenderCommand
+            ??= new LambdaCommand(OnCreateSenderCommandExecute);
+        private void OnCreateSenderCommandExecute(object obj)
+        {
+           // _DialogService.OpenDialog<string>(<DialogViewModel<Resul>>)();
         }
         #endregion
 

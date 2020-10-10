@@ -1,6 +1,7 @@
 ﻿using MailSender.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using MailSender.Interfaces;
 using MailSender.lib.Interface;
 using MailSender.lib.Services;
 
@@ -22,13 +23,12 @@ namespace MailSender
         private static void InitializeServices(IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<IEncryptorService, Rfc2898Encryptor>();
 #if DEBUG
             services.AddTransient<IMailService, DebugMailService>();
 #else
             services.AddTransient<IMailService, SmtpMailService>();
 #endif
-            services.AddSingleton<IEncryptorService, Rfc2898Encryptor>();
-
             // Выбираем либо этот блок
             var memory_store = new InMemoryDataStorage(new Rfc2898Encryptor());
             services.AddSingleton<IServersStorage>(memory_store);
@@ -43,6 +43,8 @@ namespace MailSender
             //services.AddSingleton<ISendersStorage>(file_storage);
             //services.AddSingleton<IRecipientsStorage>(file_storage);
             //services.AddSingleton<IMailsStorage>(file_storage);
+
+            //services.AddSingleton<IDialogService>();
         }
     }
 }
