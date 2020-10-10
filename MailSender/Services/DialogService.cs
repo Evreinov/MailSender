@@ -1,11 +1,12 @@
 ﻿using MailSender.ViewModels;
 using MailSender.Interfaces;
+using MailSender.ViewModels.Base;
 
 namespace MailSender.Services
 {
-    class DialogService
+    class DialogService : IDialogService
     {
-        public T OpenDialog<T>(DialogViewModel<T> viewModel)
+        public T OpenDialog<T>(DialogViewModelBase<T> viewModel)
         {
             IDialogWindow window = new SenderEditDialog();
             window.DataContext = viewModel;

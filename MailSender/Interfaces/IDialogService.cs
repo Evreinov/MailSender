@@ -1,9 +1,9 @@
-﻿using MailSender.ViewModels;
+﻿using MailSender.ViewModels.Base;
 
 namespace MailSender.Interfaces
 {
     public interface IDialogService
     {
-        T OpenDialog<T>(DialogViewModel<T> ViewModel);
+        T OpenDialog<T>(DialogViewModelBase<T> ViewModel);
     }
 }

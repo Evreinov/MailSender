@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MailSender"
+        xmlns:mv="clr-namespace:MailSender.ViewModels"
         mc:Ignorable="d"
         Title="Отправитель" 
         WindowStartupLocation="CenterOwner"
@@ -17,7 +18,7 @@
             <Button Content="Отмена" IsCancel="True" Margin="2,0,0,0"/>
         </UniformGrid>
         <GroupBox Header="Имя отправителя" DockPanel.Dock="Top">
-            <TextBox Name="SenderName" x:FieldModifier="private"/>
+            <TextBox Name="SenderName" x:FieldModifier="private" Text="{Binding Name}"/>
         </GroupBox>
         <GroupBox Header="Электронный почтовый ящик отправителя" DockPanel.Dock="Top">
             <TextBox Name="SenderAddress" x:FieldModifier="private"/>

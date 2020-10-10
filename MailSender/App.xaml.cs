@@ -1,9 +1,9 @@
 ﻿using MailSender.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using MailSender.Interfaces;
 using MailSender.lib.Interface;
 using MailSender.lib.Services;
+using MailSender.Interfaces;
 
 namespace MailSender
 {

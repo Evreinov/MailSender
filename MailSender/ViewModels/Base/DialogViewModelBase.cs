@@ -1,16 +1,16 @@
 ﻿using MailSender.Interfaces;
 
-namespace MailSender.ViewModels
+namespace MailSender.ViewModels.Base
 {
-    public class DialogViewModel<T>
+    public class DialogViewModelBase<T>
     {
         public string Title { get; set; }
         public string Message { get; set; }
         public T DialogResult { get; set; }
 
-        public DialogViewModel() : this(string.Empty, string.Empty) { }
-        public DialogViewModel(string title) : this(title, string.Empty) { }
-        public DialogViewModel(string title, string message)
+        public DialogViewModelBase() : this(string.Empty, string.Empty) { }
+        public DialogViewModelBase(string title) : this(title, string.Empty) { }
+        public DialogViewModelBase(string title, string message)
         {
             Title = title;
             Message = message;
