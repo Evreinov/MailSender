@@ -1,4 +1,6 @@
 ﻿using MVVMStudy.Models;
+using MVVMStudy.Commands;
+using System.Windows.Input;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -12,6 +14,22 @@ namespace MVVMStudy
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ICommand _changeColorCommand = null;
+        public ICommand ChangeColorCommand => _changeColorCommand ?? (_changeColorCommand = new ChangeColorCommand());
+
+        private ICommand _addCarCommand = null;
+        public ICommand AddCarCommand => _addCarCommand ?? (_addCarCommand = new AddCarCommand());
+
+        private RelayCommand<Inventory> _deleteCarCommand = null;
+        public RelayCommand<Inventory> DeleteCarCommand => _deleteCarCommand ?? (_deleteCarCommand = new RelayCommand<Inventory>(DeleteCar, CanDeleteCar));
+
+        private bool CanDeleteCar(Inventory сar) => сar != null;
+
+        private void DeleteCar(Inventory car)
+        {
+            _cars.Remove(car);
+        }
+
         readonly IList<Inventory> _cars = new ObservableCollection<Inventory>();
         public MainWindow()
         {
@@ -21,14 +39,9 @@ namespace MVVMStudy
             cboCars.ItemsSource = _cars;
         }
 
-        private void BtnChangeColor_OnClick(object sender, RoutedEventArgs e)
-        {
-            _cars.First(x => x.CarId == ((Inventory)cboCars.SelectedItem)?.CarId).Color = "Pink";
-        }
-
         private void BtnAddCar_OnClick(object sender, RoutedEventArgs e)
         {
-            var maxCount = _cars?.Max(x => x.CarId) ?? 0;
+            var maxCount = _cars?.DefaultIfEmpty().Max(x => x.CarId) ?? 0;
             _cars?.Add(new Inventory { CarId = ++maxCount, Color = "Yeloow", Make = "VM", PetName = "Birdie", IsChanged = false });
         }
     }
