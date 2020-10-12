@@ -1,11 +1,13 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.ComponentModel.DataAnnotations;
 
 namespace MVVMStudy.Models
 {
-    class Inventory : INotifyPropertyChanged
+    partial class Inventory : INotifyPropertyChanged
     {
         private int _carId;
+        [Required]
         public int CarId 
         { 
             get => _carId;
@@ -17,6 +19,8 @@ namespace MVVMStudy.Models
             } 
         }
         private string _make;
+        [Required]
+        [StringLength(50)]
         public string Make
         { 
             get => _make;
@@ -24,10 +28,20 @@ namespace MVVMStudy.Models
             {
                 if (value == _make) return;
                 _make = value;
+                if (Make == "ModelT")
+                {
+                    AddError(nameof(Make), "Too Old");
+                }
+                else
+                {
+                    ClearErrors(nameof(Make));
+                }
                 OnPropertyChanged(nameof(Make));
             } 
         }
         private string _color;
+        [Required]
+        [StringLength(50)]
         public string Color
         {
             get => _color;
@@ -39,6 +53,7 @@ namespace MVVMStudy.Models
             }
         }
         private string _petName;
+        [StringLength(50)]
         public string PetName 
         { 
             get => _petName;
@@ -69,7 +84,9 @@ namespace MVVMStudy.Models
             {
                 IsChanged = true;
             }
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
         }
     }
 }
+ 
