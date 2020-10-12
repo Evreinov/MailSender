@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMStudy"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="400">
+        Title="MainWindow" Height="300" Width="400"
+        DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Style.Triggers>
@@ -43,7 +44,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Content="Vehicle"/>
-            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName"/>
+            <ComboBox Name="cboCars" Grid.Column="1" DisplayMemberPath="PetName" ItemsSource="{Binding Cars}"/>
         </Grid>
         <Grid Grid.Row="1" Name="DetailsGrid" DataContext="{Binding ElementName=cboCars, Path=SelectedItem}">
             <Grid.ColumnDefinitions>
@@ -68,13 +69,13 @@
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=PetName, ValidatesOnDataErrors=True}"/>
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Right" Orientation="Horizontal" Margin="5,0,5,0">
                 <Button x:Name="btnAddCar" Content="Add Car" Margin="5,0,5,0" Padding="4,0"
-                        Command="{Binding Path=AddCarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                        Command="{Binding Path=DataContext.AddCarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboCars, Path=ItemsSource}"/>
                 <Button x:Name="btnChangeColor" Content="Change Color" Margin="5,0,5,0" Padding="4,2" 
-                        Command="{Binding Path=ChangeColorCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                        Command="{Binding Path=DataContext.ChangeColorCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboCars, Path=SelectedItem}"/>
                 <Button x:Name="btnDeleteCar" Content="Delete Car" Margin="5,0,5,0" Padding="4,2" 
-                        Command="{Binding Path=DeleteCarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+                        Command="{Binding Path=DataContext.DeleteCarCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
                         CommandParameter="{Binding ElementName=cboCars, Path=SelectedItem}"/>
             </StackPanel>
             <Label Grid.Column="0" Grid.Row="5" Content="Is Changed"/>
