@@ -2,7 +2,7 @@
 
 namespace MailSender.Commands
 {
-    class LambdaCommand : Base.CommandBase
+    internal class LambdaCommand : Base.CommandBase
     {
         private readonly Action<object> _Execute;
 

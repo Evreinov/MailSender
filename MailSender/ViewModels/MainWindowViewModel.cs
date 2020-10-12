@@ -219,8 +219,10 @@ namespace MailSender.ViewModels
             ??= new LambdaCommand(OnCreateSenderCommandExecute);
         private void OnCreateSenderCommandExecute(object obj)
         {
-            var dialog = new SenderEditDialogViewModel(SelectedSender);
-           _DialogService.OpenDialog<Sender>(dialog);
+            Sender newSender = new Sender();
+            var dialog = new SenderEditDialogViewModel(newSender) { Title = "Тестовая! " };
+            _DialogService.OpenDialog(dialog);
+             
         }
         #endregion
 

@@ -4,6 +4,7 @@ using System;
 using MailSender.lib.Interface;
 using MailSender.lib.Services;
 using MailSender.Interfaces;
+using MailSender.Services;
 
 namespace MailSender
 {
@@ -44,7 +45,7 @@ namespace MailSender
             //services.AddSingleton<IRecipientsStorage>(file_storage);
             //services.AddSingleton<IMailsStorage>(file_storage);
 
-            //services.AddSingleton<IDialogService>();
+            services.AddScoped(typeof(IDialogService), typeof(DialogService));
         }
     }
 }

@@ -76,8 +76,7 @@
                             <Button ToolTip="Добавить" 
                                     fa:Awesome.Content ="Solid_PlusCircle" 
                                     Foreground="Green"
-                                    Command="{Binding CreateServerCommand}"
-                                    CommandParameter="{Binding SelectedServer}"/>
+                                    Command="{Binding CreateServerCommand}"/>
                             <Button ToolTip="Редактировать" 
                                     fa:Awesome.Content="Solid_PencilAlt" 
                                     Foreground="Orange"

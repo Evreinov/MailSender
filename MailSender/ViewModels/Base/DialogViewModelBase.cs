@@ -5,15 +5,15 @@ namespace MailSender.ViewModels.Base
     public class DialogViewModelBase<T>
     {
         public string Title { get; set; }
-        public string Message { get; set; }
+        public object Object { get; set; }
         public T DialogResult { get; set; }
 
-        public DialogViewModelBase() : this(string.Empty, string.Empty) { }
-        public DialogViewModelBase(string title) : this(title, string.Empty) { }
-        public DialogViewModelBase(string title, string message)
+        public DialogViewModelBase() : this(string.Empty, null) { }
+        public DialogViewModelBase(string title) : this(title, null) { }
+        public DialogViewModelBase(string title, object obj)
         {
             Title = title;
-            Message = message;
+            Object = obj;
         }
 
         public void CloseDialogWithResult(IDialogWindow dialog, T result)
